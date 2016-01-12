@@ -12,11 +12,17 @@ import babelify from 'babelify';
 import del from 'del';
 
 gulp.task('copy', () => {
-  return gulp.src('src/index.html')
+  return gulp.src([
+    'src/index.html',
+    'src/views/**/*',
+    'src/css/**/*'
+    ], {
+      base: 'src'
+    })
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('build', ['copy'], () => {
+gulp.task('build', ['copy', 'copycss'], () => {
   const b = browserify('src/index.js', { debug: true })
     .transform(babelify);
   return bundle(b);
