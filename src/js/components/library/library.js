@@ -1,16 +1,15 @@
 import {Component} from 'angular2/core';
 
+import {BooksService} from '../../services/books';
+
 @Component({
     selector: 'library',
-    templateUrl: '/views/library/library.html'
+    templateUrl: '/views/library/library.html',
+    viewProviders: [BooksService]
 })
 
 export class Library {
-    constructor() {
-        this.books = [{
-            name: 'book 1'
-        }, {
-            name: 'book 2'
-        }];
+    constructor(Books: BooksService) {
+        this.books = Books.getBooks();
     }
 }
